@@ -1,17 +1,27 @@
 import { Request, Response } from "express";
+import { UserService } from "../services/UserService";
 
-const db = [
-  {
-    name: "Joana",
-    email: "joana@dio.com",
-  },
-];
 
 export class UserController {
+
   createUser = (request: Request, response: Response) => {
+    const userService = new UserService()    
     const user = request.body;
-    db.push(user);
-    console.log(db)
+
+    if(!user.name){
+      return response.status(400).json({ message: "Bad Request: Name is required" });
+    }
+
+
+    userService.createUser(user.name, user.email);
+    
     return response.status(201).json({ message: "User created" });
   };
+
+  getAllUsers = (request: Request, response: Response ): Response => {
+    const userService = new UserService()    
+    const users = userService.getAllUsers();
+    return response.status(200).json(users)    
+  };
+
 }
