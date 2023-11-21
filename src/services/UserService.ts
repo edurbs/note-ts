@@ -1,3 +1,8 @@
+export interface User {
+  name: string;
+  email: string;
+}
+
 let db = [
   {
     name: "Joana",
@@ -7,17 +12,24 @@ let db = [
 
 
 export class UserService {
+
+  db: User[];
+
+  constructor(database = db ) {
+    this.db = database;
+  }
+
   deleteUser(email: string) {
-    db = db.filter((user) => user.email !== email);
-    console.log('DB atualizado', db);
+    this.db = this.db.filter((user) => user.email !== email);
+    console.log('DB atualizado', this.db);
   }
   createUser = (name: string, email: string) => {
     const user = { name, email };
-    db.push(user);
-    console.log('DB atualizado', db);
+    this.db.push(user);
+    console.log('DB atualizado', this.db);
   };
 
   getAllUsers = () => {
-    return db;
+    return this.db;
   }
 }
