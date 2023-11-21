@@ -24,4 +24,11 @@ export class UserController {
     return response.status(200).json(users)    
   };
 
+  deleteUser = (request: Request, response: Response) => {
+    const userService = new UserService()    
+    const user = request.body;
+    userService.deleteUser(user.email);
+    return response.status(200).json({ message: "User deleted" });
+  }
+
 }

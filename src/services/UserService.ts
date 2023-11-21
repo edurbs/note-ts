@@ -1,4 +1,4 @@
-const db = [
+let db = [
   {
     name: "Joana",
     email: "joana@dio.com",
@@ -7,6 +7,10 @@ const db = [
 
 
 export class UserService {
+  deleteUser(email: string) {
+    db = db.filter((user) => user.email !== email);
+    console.log('DB atualizado', db);
+  }
   createUser = (name: string, email: string) => {
     const user = { name, email };
     db.push(user);
