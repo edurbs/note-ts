@@ -1,1 +1,3 @@
-console.log('ola mundo')
+import express from 'express';
+
+const server = express();
